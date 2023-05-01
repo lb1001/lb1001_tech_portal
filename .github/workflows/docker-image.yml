@@ -12,13 +12,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
     - name: Build the Docker image
       run: docker build . --file build.dockerfile --tag lb1001/tech_portal:$(date +%s)
-    - uses: docker/login-action@v2
+      
     - name: Login to Docker Hub
+    - uses: docker/login-action@v2
       with:
         username: luobiao90@gmail.com
         password: dckr_pat_7_WiztugPk9bPRnT8hCuBrPxM5U
+        
     - name: Build and push
     - uses: docker/build-push-action@v4
       with:
