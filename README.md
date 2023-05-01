@@ -1,3 +1,4 @@
+[![Build and Deploy Docker Image](https://github.com/lb1001/lb1001_tech_portal/actions/workflows/docker-imagev1.yaml/badge.svg)](https://github.com/lb1001/lb1001_tech_portal/actions/workflows/docker-imagev1.yaml)
 # Website
 
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
