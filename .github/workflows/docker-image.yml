@@ -3,6 +3,8 @@ name: Docker Image Auto Deployment
 on:
   push:
     branches: [ "main" ]
+env:
+  TAG: v20230501
 
 jobs:
 
