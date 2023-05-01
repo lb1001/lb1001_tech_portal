@@ -5,10 +5,11 @@ on:
 #     branches: [ "main" ]
   workflow_dispatch:
     inputs:
-      TAG:
+      tag:
         description: docker image tag
         required: true
-
+env:
+  dockerTag: ${{github.event.inputs.tag}}
 jobs:
 
   build:
@@ -28,7 +29,7 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         push: true
-        tags: lb1001/tech_portal:$TAG
+        tags: lb1001/tech_portal:$dockerTag
         file: build.dockerfile
         
     - name: SSH into Remote Host
@@ -38,9 +39,9 @@ jobs:
           username: root
           password: Luobiao1990
     - name: Pull Docker Image
-      run: docker pull lb1001/tech_portal:${{github.event.inputs.TAG}}
+      run: docker pull lb1001/tech_portal:$dockerTag
       
     - name: Start Docker Container
-      run: docker run -d --name lb1001.tech.portal -p 80:80 lb1001/tech_portal:${{github.event.inputs.TAG}}
+      run: docker run -d --name lb1001.tech.portal -p 80:80 lb1001/tech_portal:$dockerTag
     
       
