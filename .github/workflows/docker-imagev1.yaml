@@ -45,8 +45,9 @@ jobs:
         username: ${{ env.REMOTE_USERNAME }}
         password: ${{ env.REMOTE_PASSWORD }}
         script: |
-          docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
-          docker pull $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
-          docker stop $DOCKER_CONTAINER_NAME || true
-          docker rm $DOCKER_CONTAINER_NAME || true
-          docker run -d --name $DOCKER_CONTAINER_NAME -p 80:80 $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
+          docker login -u ${{ env.DOCKER_HUB_USERNAME }} -p ${{ env.DOCKER_HUB_PASSWORD }}
+          docker pull ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
+          echo pull ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }} success...
+          docker stop ${{ env.DOCKER_CONTAINER_NAME }} || true
+          docker rm ${{ env.DOCKER_CONTAINER_NAME }} || true
+          docker run -d --name ${{ env.DOCKER_CONTAINER_NAME }} -p 80:80 ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
