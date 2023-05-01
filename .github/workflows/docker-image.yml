@@ -3,8 +3,13 @@ name: Docker Image Auto Deployment
 on:
   push:
     branches: [ "main" ]
-env:
-  TAG: v20230501
+  workflow_dispatch:
+    inputs:
+      TAG:
+        description: docker image tag
+        required: true
+# env:
+#   TAG: v20230501
 
 jobs:
 
@@ -35,9 +40,9 @@ jobs:
           username: root
           password: Luobiao1990
     - name: Pull Docker Image
-      run: docker pull lb1001/tech_portal:${{TAG}}
+      run: docker pull lb1001/tech_portal:${{github.event.inputs.TAG}}
       
     - name: Start Docker Container
-      run: docker run -d --name lb1001.tech.portal -p 80:80 lb1001/tech_portal:${{TAG}}
+      run: docker run -d --name lb1001.tech.portal -p 80:80 lb1001/tech_portal:${{github.event.inputs.TAG}}
     
       
