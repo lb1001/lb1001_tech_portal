@@ -1,0 +1,54 @@
+name: Docker Image Auto DeploymentV2
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: docker image tag
+        required: true
+
+env:
+  DOCKER_USERNAME: lb1001
+  DOCKER_PASSWORD: dckr_pat_7_WiztugPk9bPRnT8hCuBrPxM5U
+  DOCKER_REPOSITORY: lb1001/tech_portal
+  DOCKER_TAG: ${{ github.event.inputs.tag }}
+  REMOTE_HOST: www.lb1001.tech
+  REMOTE_USERNAME: root
+  REMOTE_PASSWORD: Luobiao1990
+
+jobs:
+
+  build-and-deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Build and push Docker image
+      env:
+        DOCKER_BUILDKIT: 1
+      run: |
+        docker build \
+          --tag $DOCKER_REPOSITORY:$DOCKER_TAG \
+          --file build.dockerfile \
+          .
+        echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+        docker push $DOCKER_REPOSITORY:$DOCKER_TAG
+        
+    - name: SSH into remote host
+      uses: appleboy/ssh-action@v1
+      with:
+        host: ${{ env.REMOTE_HOST }}
+        username: ${{ env.REMOTE_USERNAME }}
+        password: ${{ env.REMOTE_PASSWORD }}
+        script: |
+          echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+          docker pull $DOCKER_REPOSITORY:$DOCKER_TAG
+          docker stop tech_portal || true
+          docker rm tech_portal || true
+          docker run -d \
+            --name tech_portal \
+            --network host \
+            --restart always \
+            $DOCKER_REPOSITORY:$DOCKER_TAG
