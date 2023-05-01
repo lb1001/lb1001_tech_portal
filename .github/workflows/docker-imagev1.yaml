@@ -46,8 +46,12 @@ jobs:
         password: ${{ env.REMOTE_PASSWORD }}
         script: |
           docker login -u ${{ env.DOCKER_HUB_USERNAME }} -p ${{ env.DOCKER_HUB_PASSWORD }}
-          docker pull ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
+          if [[ -z "$(docker images -q ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }} 2> /dev/null)" ]]; then
+            docker pull ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
+          fi
           echo pull ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }} success...
-          docker stop ${{ env.DOCKER_CONTAINER_NAME }} || true
-          docker rm ${{ env.DOCKER_CONTAINER_NAME }} || true
+          if [[ -n "$(docker ps -a | grep ${{ env.DOCKER_CONTAINER_NAME }})" ]]; then
+            docker stop ${{ env.DOCKER_CONTAINER_NAME }} || true
+            docker rm ${{ env.DOCKER_CONTAINER_NAME }} || true
+          fi
           docker run -d --name ${{ env.DOCKER_CONTAINER_NAME }} -p 80:80 ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
