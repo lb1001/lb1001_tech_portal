@@ -1,15 +1,13 @@
 name: Docker Image Auto Deployment
 
 on:
-  push:
-    branches: [ "main" ]
+#   push:
+#     branches: [ "main" ]
   workflow_dispatch:
     inputs:
       TAG:
         description: docker image tag
         required: true
-# env:
-#   TAG: v20230501
 
 jobs:
 
