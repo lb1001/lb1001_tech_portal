@@ -8,8 +8,8 @@ on:
         required: true
 
 env:
-  DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
-  DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
+  DOCKER_HUB_USERNAME: lb1001
+  DOCKER_HUB_PASSWORD: dckr_pat_7_WiztugPk9bPRnT8hCuBrPxM5U
   DOCKER_IMAGE_NAME: lb1001/tech_portal
   DOCKER_IMAGE_TAG: ${{ github.event.inputs.tag }}
   DOCKER_CONTAINER_NAME: tech_portal
@@ -28,22 +28,22 @@ jobs:
     - name: Login to Docker Hub
       uses: docker/login-action@v2
       with:
-        username: ${{ DOCKER_HUB_USERNAME }}
-        password: ${{ DOCKER_HUB_PASSWORD }}
+        username: ${{ env.DOCKER_HUB_USERNAME }}
+        password: ${{ env.DOCKER_HUB_PASSWORD }}
 
     - name: Build and push
       uses: docker/build-push-action@v4
       with:
         push: true
-        tags: ${{ DOCKER_IMAGE_NAME }}:${{ DOCKER_IMAGE_TAG }}
+        tags: ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
         file: build.dockerfile
 
     - name: Deploy Docker image to remote host
       uses: appleboy/ssh-action@v0.1.7
       with:
         host: ${{ REMOTE_HOST }}
-        username: ${{ REMOTE_USERNAME }}
-        password: ${{ REMOTE_PASSWORD }}
+        username: ${{ env.REMOTE_USERNAME }}
+        password: ${{ env.REMOTE_PASSWORD }}
         script: |
           docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
           docker pull $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
