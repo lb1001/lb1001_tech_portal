@@ -41,7 +41,7 @@ jobs:
     - name: Deploy Docker image to remote host
       uses: appleboy/ssh-action@v0.1.7
       with:
-        host: ${{ REMOTE_HOST }}
+        host: ${{ env.REMOTE_HOST }}
         username: ${{ env.REMOTE_USERNAME }}
         password: ${{ env.REMOTE_PASSWORD }}
         script: |
