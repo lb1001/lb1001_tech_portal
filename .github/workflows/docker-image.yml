@@ -3,6 +3,8 @@ name: Docker Image CI
 on:
   push:
     branches: [ "main" ]
+env: 
+  TAG: v20230501
 
 jobs:
 
@@ -23,7 +25,19 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         push: true
-        tags: lb1001/tech_portal:v20230501
+        tags: lb1001/tech_portal:$TAG
         file: build.dockerfile
+        
+    - name: SSH into Remote Host
+      uses: appleboy/ssh-action@master
+      with:
+          host: www.lb1001.tech
+          username: root
+          password: Luobiao1990
+    - name: Pull Docker Image
+      run: docker pull lb1001/tech_portal:$TAG
+      
+    - name: Start Docker Container
+      run: docker run -d --name lb1001.tech.portal -p 80:80 lb1001/tech_portal:$TAG
     
       
