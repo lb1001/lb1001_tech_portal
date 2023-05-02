@@ -153,8 +153,11 @@ Add `gitalk` support.
 
 import 'gitalk/dist/gitalk.css';
 import GitalkComponent from "gitalk/dist/gitalk-component";
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
-<GitalkComponent
+<BrowserOnly fallbacl = { <div/> }>
+{ () => (
+  <GitalkComponent
    options={{
      clientID: '0d99542e8f58cb34b7a9',
      clientSecret: '72285c05f54e296ef20b396730ad3c78b47db84a',
@@ -166,4 +169,7 @@ import GitalkComponent from "gitalk/dist/gitalk-component";
      labels: ['documentation'],
      distractionFreeMode: false,
    }}
- />
+  />
+) }
+</BrowserOnly>
+
