@@ -148,3 +148,22 @@ export const Highlight = ({children, color}) => (
 This is <Highlight color="#25c2a0">Docusaurus green</Highlight> !
 
 This is <Highlight color="#1877F2">Facebook blue</Highlight> !
+
+Add `gitalk` support.
+
+import 'gitalk/dist/gitalk.css';
+import GitalkComponent from "gitalk/dist/gitalk-component";
+
+<GitalkComponent
+   options={{
+     clientID: '0d99542e8f58cb34b7a9',
+     clientSecret: '72285c05f54e296ef20b396730ad3c78b47db84a',
+     repo: 'lb1001_tech_portal',
+     owner: 'lb1001',
+     admin: ['lb1001'],
+     id: 'markdown-features',
+     title: 'markdown-features',
+     labels: ['documentation'],
+     distractionFreeMode: false,
+   }}
+ />
