@@ -22,8 +22,14 @@ FROM nginx:stable-bullseye
 # Copy the static site from the previous stage to the nginx "html" directory
 COPY --from=builder /app/build /usr/share/nginx/html
 
-# Expose port 80
+# Copy the ssl certification to server and update the server config
+COPY --from=builder /app/nginx/ssl /usr/share/nginx/ssl
+RUN rm /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/nginx/tech_portal.conf /etc/nginx/conf.d
+
+# Expose port 80 and 443
 EXPOSE 80
+EXPOSE 443
 
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"]
