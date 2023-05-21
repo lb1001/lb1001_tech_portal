@@ -23,9 +23,9 @@ FROM nginx:stable-bullseye
 COPY --from=builder /app/build /usr/share/nginx/html
 
 # # Copy the ssl certification to server and update the server config
-# COPY --from=builder /app/nginx/ssl /usr/share/nginx/ssl
-# RUN rm /etc/nginx/conf.d/default.conf
-# COPY --from=builder /app/nginx/tech_portal.conf /etc/nginx/conf.d
+COPY --from=builder /app/nginx/ssl /usr/share/nginx/ssl
+RUN rm /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/nginx/tech_portal.conf /etc/nginx/conf.d
 
 # Expose port 80 and 443
 EXPOSE 80

@@ -1,2 +1,0 @@
-#/bin/bash
-docker build --rm -t lb1001/tech_portal:v0.1 -f build.dockerfile .
