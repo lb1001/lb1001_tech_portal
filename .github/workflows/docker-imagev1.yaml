@@ -54,4 +54,4 @@ jobs:
             docker stop ${{ env.DOCKER_CONTAINER_NAME }} || true
             docker rm ${{ env.DOCKER_CONTAINER_NAME }} || true
           fi
-          docker run -d --name ${{ env.DOCKER_CONTAINER_NAME }} -p 80:80 ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
+          docker run -d --name ${{ env.DOCKER_CONTAINER_NAME }} -p 80:80 -p 443:443 ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
