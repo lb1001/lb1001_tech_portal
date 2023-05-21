@@ -88,6 +88,12 @@ const config = {
             position: 'right',
             label: '算法小知识',
           },
+          {
+            type: 'docSidebar',
+            sidebarId: 'docTranslateSidebar',
+            position: 'right',
+            label: '资料翻译'
+          },
           {to: '/blog', label: '速记', position: 'right'},
           {
             href: 'https://github.com/facebook/docusaurus',

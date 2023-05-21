@@ -25,8 +25,10 @@ const sidebars = {
   ],
   algoStuffSidebar: [
     "intro"
+  ],
+  docTranslateSidebar: [
+    'intro'
   ]
-
 
   // But you can create a sidebar manually
   /*
