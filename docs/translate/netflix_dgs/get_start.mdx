@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 
 ## 创建一个新的SpringBoot 项目
-`DGS` 框架是基于 SpringBoot3.0 的，所以如果你当前暂时还没有应用的话，请基于 SpringBoot 3.0 创建一个应用。同时也请注意，你仍然可以在 SpringBoot 2.7 环境下使用`5.5.x`版本的DGS框架。但是`6.x`版本的`DGS`框架将要求使用 `SpringBoot 3`. 使用 Spring Initializr 是创建SpringBoot 应用的一个非常好简单方式。你可以基于`Java 17`或者`Kotlin`可以使用`Gradle` 或者`Maven`来构建应用，但是我们推荐使用`Gradle`， 因为我们针对`Gradle`开发了一个非常酷的插件工具 [code generation plugin](xxxx)。
+`DGS` 框架是基于 SpringBoot3.0 的，所以如果你当前暂时还没有应用的话，请基于 SpringBoot 3.0 创建一个应用。同时也请注意，你仍然可以在 SpringBoot 2.7 环境下使用`5.5.x`版本的DGS框架。但是`6.x`版本的`DGS`框架将要求使用 `SpringBoot 3`. 使用 Spring Initializr 是创建SpringBoot 应用的一个非常好简单方式。你可以基于`Java 17`或者`Kotlin`可以使用`Gradle` 或者`Maven`来构建应用，但是我们推荐使用`Gradle`， 因为我们针对`Gradle`开发了一个非常酷的插件工具 [code generation plugin](https://lb1001.tech)。
 
 对 Spring 的唯一依赖就是 Spring Web.
 ![Spring initializr](./asset/initializr.png)
@@ -19,7 +19,7 @@ import CodeBlock from '@theme/CodeBlock';
 最新的 6.x 及后续`DGS`版本将要求使用 Spring Boot 3.0 以及JDK 17。 如果你当前的项目是基于 Spring Boot 2.7，则你将需要使用 5.5.x版本的`DGS`框架。如果你的项目是基于 Spring Boot 2.6，则需要使用 5.4.x 或者更早版本的DGS框架。
 
 ## 添加 DGS 框架的依赖
-在你项目的`Gradle`或者`Maven`的配置中添加平台依赖。`com.netflix.graphql.dgs:graphql-dgs-platform-dependencies` 这个依赖是一个 [platform/BOM](xxx)依赖, 它`DGS`框架的各个独立依赖模块以及传递依赖模块的版本拉通对齐了。`com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter` 是一个Spring Boot的starter，它里面包含了你构建一个DGS项目所需要的所有的依赖和配置。但是如果是基于`WebFlux`构建项目的话，则应该使用`com.netflix.graphql.dgs:graphql-dgs-webflux-starter`这个starter。
+在你项目的`Gradle`或者`Maven`的配置中添加平台依赖。`com.netflix.graphql.dgs:graphql-dgs-platform-dependencies` 这个依赖是一个 [platform/BOM](https://lb1001.tech)依赖, 它`DGS`框架的各个独立依赖模块以及传递依赖模块的版本拉通对齐了。`com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter` 是一个Spring Boot的starter，它里面包含了你构建一个DGS项目所需要的所有的依赖和配置。但是如果是基于`WebFlux`构建项目的话，则应该使用`com.netflix.graphql.dgs:graphql-dgs-webflux-starter`这个starter。
 <Tabs>
 <TabItem value="gradle" label="Gradle">
 
@@ -88,7 +88,7 @@ dependencies {
 </Tabs>
 
 :::tip Important
-DGS框架使用Kotlin 1.5版本。如果您使用的是[Spring Boot Gradle Plugin 2.3](xxxx), 您则需要明确指定Kotlin版本。该插件会传递的将Kotlin版本降级至1.3。您可以通过Gradle的扩展方式来明确设置, 如下所示：
+DGS框架使用Kotlin 1.5版本。如果您使用的是[Spring Boot Gradle Plugin 2.3](https://lb1001.tech), 您则需要明确指定Kotlin版本。该插件会传递的将Kotlin版本降级至1.3。您可以通过Gradle的扩展方式来明确设置, 如下所示：
 
 <Tabs>
 <TabItem value="gradle" label="Gradle">
@@ -125,7 +125,7 @@ type Show {
 这个 schema 支持查询Show列表, 同时支持根据title来进行条件过滤。
 
 ## 实现一个Data Fetcher
-Data Fetcher是用于为某个query返回具体数据的类。创建两个新类`example.ShowsDataFetcher`和`Show`，并且添加如下的代码。请注意，我们可以使用插件 [Codegen Plugin](xxx)来自动生成这些代码，但是在这里为了演示我们手动写这些类。
+Data Fetcher是用于为某个query返回具体数据的类。创建两个新类`example.ShowsDataFetcher`和`Show`，并且添加如下的代码。请注意，我们可以使用插件 [Codegen Plugin](https://lb1001.tech)来自动生成这些代码，但是在这里为了演示我们手动写这些类。
 <Tabs>
 <TabItem value="java" label="Java">
 
@@ -220,8 +220,8 @@ GraphiQL编辑器只是一个调用了您应用的`/graphql`接口的一个UI页
 
 ## 下一步
 现在您已经运行起来了您的第一个GraphQL服务，我们建议您阅读一下内容来进一步优化您的服务：
-- [使用DGS的 Platform BOM](xxx)来保证DGS 框架的依赖版本一致；
-- 学习[datafetchers](xxxx)
-- 使用[Gradle CodeGen Plugin](xxx) - 它会帮你自动生成data types
-- 使用JUnit[编写查询测试用例](xxx)
-- 参考[项目例子](xxxx)
+- [使用DGS的 Platform BOM](https://lb1001.tech)来保证DGS 框架的依赖版本一致；
+- 学习[datafetchers](https://lb1001.tech)
+- 使用[Gradle CodeGen Plugin](https://lb1001.tech) - 它会帮你自动生成data types
+- 使用JUnit[编写查询测试用例](https://lb1001.tech)
+- 参考[项目例子](https://lb1001.tech)
