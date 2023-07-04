@@ -1,0 +1,53 @@
+---
+sidebar_position: 2
+---
+# 配置
+
+## 核心属性
+| Name | Type | Default | Descrption |
+| ---- | -----|---------|------------|
+| dgs.graphql.path | String | `/graphql` | GraphQL对外发布服务的地址 |
+| dgs.graphql.introspection.enabled | Boolean | true | 开启GraphQL的introspection功能，即允许用户访问GraphQL API的元数据 |
+| dgs.graphql.schema-json.enabled | Boolean | true | 启用schema-json端点功能。schema-json端点是GraphQL API提供的一个特殊端点，用于获取API架构的JSON表示形式。启用schema-json端点功能后，可以通过发送HTTP请求到该端点来获取API的架构信息，而无需执行实际的GraphQL查询。|
+| dgs.graphql.schema-json.path | String | `schema.json` | 不带尾斜杠的schema-json端点的路径 |
+| dgs.graphql.schema-locations | [String] | `classpath*:schema/**/*.graphql*` | GraphQL schema文件路径 |
+| dgs.graphql.graphiql.enabled | Boolean | true | 是否开启GraphiQL功能 |
+| dgs.graphql.graphiql.path | String | `/graphiql` | 不带尾斜杠的GraphiQL端点路径 |
+| dgs.graphql.graphiql.title | String | `Simple GraphiQL Example` | GraphiQL 页面的标题 | 
+
+### 举例: 配置GraphQL schema文件的路径
+您可以通过`dgs.graphql.schema-locations`这个配置项来配置您项目中GraphQL schema文件的位置。在默认情况下，DGS框架会尝试在您的`Classpath`下面的`schema`目录中寻找GraphQL schema文件，例如：`classpath*:schema/**/*.graphql*`。我们来看一个例子，假设你想将schema文件的所在目录从`schema`文件夹换成`graphql-schemas`，你可以按如下方式配置：
+```yaml
+dgs:
+  graphql:
+    schema-locations:
+      - classpath*:graphql-schemas/**/*.graphql*
+```
+
+现在，假设您想额外再添加一个schema目录`raphql-experimental-schemas`:
+```yaml
+dgs:
+  graphql:
+    schema-locations:
+      - classpath*:graphql-schemas/**/*.graphql*
+      - classpath*:graphql-experimental-schemas/**/*.graphql*
+```
+
+## DGS 扩展的GraphQL Scalar类型: graohql-dgs-extended-scalars
+| Name | Type | Default | Decription |
+| ---- | ----| ------| ----|
+| dgs.graphql.extensions.scalars.enabled | Boolean | true | 启用[graphql-java-extended-scalars](https://github.com/graphql-java/graphql-java-extended-scalars)包中DGS框架可用的GraphQL扩展Scalar类型  |
+| dgs.graphql.extensions.scalars.chars.enabled | Boolean | true | 注册扩展的`Char` scalar类型 |
+| dgs.graphql.extensions.scalars.numbers.enabled | Boolean | true | 将会注册所有数字相关的scalar扩展类型(PositiveInt, NegativeInt, NonPositiveInt, NonNegativeInt, PositiveFloat, NegativeFloat, NonPositiveFloat, NonNegativeFloat, Long, Short, Byte, BigDecimal, BigIntege) |
+| dgs.graphql.extensions.scalars.objects.enabled | Boolean | true | 将会注册`Object`, `Json`, `Url`, `Locale`这几个扩展的scalar类型 |
+| dgs.graphql.extensions.scalars.time-dates.enabled | Boolean | true | 将会注册`DateTime`, `Date`, `Time`, `LocalTime`这几个扩展的scalar类型 |
+| dgs.graphql.extensions.scalars.ids.enabled | Boolean | true | 将会注册`UUID`这个scalar扩展类型 |
+| dgs.graphql.extensions.scalars.country | Boolean | true | 将会注册`CountryCode`这个scalar扩展类型 |
+| dgs.graphql.extensions.scalars.currency	| Boolean | true | 将会注册`Currency`这个scalar扩展类型 |
+
+## DGS 扩展的检验: graphql-dgs-extended-validation
+| Name | Type | Default | Description |
+| ---| --- | ---- | ---- |
+| dgs.graphql.extensions.validation.enabled | Boolean | true | 注册[graphql-java-extended-validation](https://github.com/graphql-java/graphql-java-extended-validation)中可用的Validation Schema directive |
+
+

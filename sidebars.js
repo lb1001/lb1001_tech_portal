@@ -32,7 +32,15 @@ const sidebars = {
 
 
   netflix_dgs_side_bar: [
-    'translate/netflix_dgs/get_start',
+    {
+      type: 'category',
+      label: 'Netflix DGS',
+      collapsible: false,
+      items: [
+        'translate/netflix_dgs/get_start',
+        'translate/netflix_dgs/configuration'
+      ]
+    },
   ]
 
   // But you can create a sidebar manually
@@ -41,7 +49,7 @@ const sidebars = {
     'intro',
     'hello',
     {
-      type: 'category',
+      type: 'type',
       label: 'Tutorial',
       items: ['tutorial-basics/create-a-document'],
     },
