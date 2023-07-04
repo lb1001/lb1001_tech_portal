@@ -28,6 +28,11 @@ const sidebars = {
   ],
   docTranslateSidebar: [
     'intro'
+  ],
+
+
+  netflix_dgs_side_bar: [
+    'translate/netflix_dgs/get_start',
   ]
 
   // But you can create a sidebar manually

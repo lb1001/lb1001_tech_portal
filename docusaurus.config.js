@@ -89,10 +89,16 @@ const config = {
             label: '算法小知识',
           },
           {
-            type: 'docSidebar',
-            sidebarId: 'docTranslateSidebar',
+            type: 'dropdown',
             position: 'right',
-            label: '资料翻译'
+            label: '资料翻译',
+            items: [
+              {
+                type: 'docSidebar',
+                label: 'Netflix DGS',
+                sidebarId: 'netflix_dgs_side_bar',
+              }
+            ]
           },
           {to: '/blog', label: '速记', position: 'right'},
           {
